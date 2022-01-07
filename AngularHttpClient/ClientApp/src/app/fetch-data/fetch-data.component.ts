@@ -67,7 +67,7 @@ export class FetchDataComponent implements OnInit{
   }
 
   setNumber(row: number, col: number) {
-    if(SudokuFunctions.isNumberValid(this.data, row, col, this.activeNumber)) {
+    if (this.data[row][col] == 0 && SudokuFunctions.isNumberValid(this.data, row, col, this.activeNumber)) {
       this.data[row][col] = this.activeNumber;
     }else{
       this.invalidGuess = {x: row, y: col};

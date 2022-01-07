@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.idea",
+    "\\.idea\\.idea.AngularHttpClient",
+    "\\AngularHttpClient",
+    "\\AngularHttpClient\\ClientApp\\src\\app\\fetch-data",
+    "\\AngularHttpClient\\Controllers",
+    "\\AngularHttpClient\\Properties",
+    "\\AngularHttpClient\\SudokuFunctions",
+    "\\AngularHttpClient\\wwwroot"
+  ],
+  "SelectedNode": "\\AngularHttpClient.sln",
+  "PreviewInSolutionExplorer": false
+}
