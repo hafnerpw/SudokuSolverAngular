@@ -1,0 +1,116 @@
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+}
+
+@mixin strong-border($pos) {
+  border-#{$pos}-width: 3px;
+  border-#{$pos}-style: solid;
+}
+
+@mixin faint-border($pos) {
+  border-#{$pos}-width: 1px;
+  border-#{$pos}-style: solid;
+}
+
+tr {
+  @include faint-border(top);
+
+  &.row_0,
+  &.row_3,
+  &.row_6 {
+    @include strong-border(top);
+  }
+
+  &.row_8 {
+    @include strong-border(bottom);
+  }
+}
+
+td {
+  @include faint-border(left);
+
+  &.col_0,
+  &.col_3,
+  &.col_6 {
+    @include strong-border(left);
+  }
+
+  &.col_8 {
+    @include strong-border(right);
+  }
+}
+
+td > button {
+  min-width: unset;
+  border-color: transparent;
+  border-style: dotted;
+  border-width: 1px;
+  border-radius: 4px;
+
+  width: 36px;
+  height: 100%;
+  line-height: 36px / 2; // otherwise digits are too far below
+  font-size: 24px;
+
+  background-color: transparent;
+
+  font-family: "Swanky and Moo Moo", Roboto, "Helvetica Neue", sans-serif;
+  padding: 36px / 10 unset unset;
+
+  &:hover {
+    background-color: rgba(pink, 0.5);
+  }
+}
+
+.selectedPosition {
+  border-color: unset !important;
+}
+
+// hides focus, i.e. dotted outline
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+.toolbar-tr {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+  align-items: center;
+
+  button {
+    min-width: unset;
+    border-color: transparent;
+    border-style: dotted;
+    border-width: 1px;
+    border-radius: 4px;
+
+    width: 36px;
+    height: 100%;
+    line-height: 36px / 2; // otherwise digits are too far below
+    font-size: 24px;
+
+    font-family: "Swanky and Moo Moo", Roboto, "Helvetica Neue", sans-serif;
+    padding: 36px / 10 unset unset;
+
+    &:hover {
+      background-color: rgba(#4285f4, 0.3);
+    }
+
+    &.activeBtn {
+      background-color: rgba(#4285f4, 0.7);
+    }
+  }
+}
+
+.column-29 {
+  flex: 0 0 auto;
+  width: 29%;
+}
