@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: FetchDataComponent, pathMatch: 'full' },
