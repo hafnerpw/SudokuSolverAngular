@@ -1,11 +1,11 @@
 <div class="container text-center">
   <div class="row mb-3">
-    <h1>Sudoku Solver</h1>
+    <h1>Sudoku Now</h1>
   </div>
   <table>
     <tr *ngFor="let row of [0, 1, 2, 3, 4,5, 6, 7, 8]" class="row_{{row}}">
       <td *ngFor="let col of [0, 1, 2, 3, 4, 5, 6, 7, 8]" class="col_{{col}}">
-        <button [class.invalid]="invalidGuess.x == row && invalidGuess.y == col"(click)="setNumber(row,col)"
+        <button [class.invalid]="invalidGuess.x == row && invalidGuess.y == col" (click)="setNumber(row,col)"
                 (contextmenu)="rightClick($event, row, col)">
           {{ data[row][col] || '&nbsp;' }}
         </button>
