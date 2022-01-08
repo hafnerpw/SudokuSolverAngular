@@ -43,6 +43,11 @@ td {
 }
 
 td > button {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
   min-width: unset;
   border-color: transparent;
   border-style: dotted;
@@ -139,4 +144,11 @@ td > button {
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
+}
+
+.no-select * {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }

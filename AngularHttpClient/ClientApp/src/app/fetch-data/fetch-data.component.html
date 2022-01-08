@@ -1,5 +1,5 @@
 <div class="container text-center">
-  <div class="row mb-3">
+  <div class="row mb-3 no-select">
     <h1>Sudoku Now</h1>
   </div>
   <table>
@@ -18,16 +18,16 @@
     </button>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col-10 col-md-7 col-lg-5 col-xl-4 col-xxl-4 text-center">
-      <label for="my_range" class="form-label">Difficulty</label>
-      <input type="range" class="form-range" id="my_range" min="25" max="63" [(ngModel)]="difficulty">
-    </div>
+  <div class="mt-2">
+    <button class="btn btn-secondary" type="button" (click)="clearSudoku()">Clear</button>
+    <button class="btn btn-outline-primary mx-3" type="button" [disabled]="actionsBlocked" (click)="getSudoku()">Generate Sudoku</button>
+    <button class="btn btn-primary" type="button" [disabled]="actionsBlocked" (click)="postSudoku()">Solve Sudoku</button>
   </div>
 
-  <div class="mt-3">
-    <button class="btn btn-secondary" type="button" (click)="clearSudoku()">Clear</button>
-    <button class="btn btn-outline-primary mx-3" type="button" (click)="getSudoku()">Generate Sudoku</button>
-    <button class="btn btn-primary" type="button" (click)="postSudoku()">Solve Sudoku</button>
+  <div class="row justify-content-center mt-3">
+    <div class="col-10 col-md-7 col-lg-5 col-xl-4 col-xxl-4 text-center">
+      <input type="range" class="form-range" id="my_range" min="26" max="63" [(ngModel)]="difficulty">
+      <label for="my_range" class="form-label">Difficulty</label>
+    </div>
   </div>
 </div>

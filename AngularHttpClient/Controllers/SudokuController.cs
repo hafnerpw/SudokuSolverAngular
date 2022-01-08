@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using AngularHttpClient.SudokuFunctions;
+﻿using AngularHttpClient.SudokuFunctions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularHttpClient.Controllers
@@ -45,7 +44,7 @@ namespace AngularHttpClient.Controllers
                 }
             }
 
-            SudokuSolver.SolveSudoku(sudoku);
+            SudokuSolver.SolveSudoku(sudoku); //TODO: implement human-like solve algorithm
 
             for(var p = 0; p < difficulty; p++)
             {

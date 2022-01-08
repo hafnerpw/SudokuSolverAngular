@@ -1,6 +1,6 @@
 import {Component, HostListener, Inject, OnInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SudokuFunctions } from "../utils/sudokuFunctions";
+import {HttpClient} from '@angular/common/http';
+import {SudokuFunctions} from "../utils/sudokuFunctions";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
@@ -8,7 +8,7 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./fetch-data.component.scss'],
   templateUrl: './fetch-data.component.html'
 })
-export class FetchDataComponent implements OnInit{
+export class FetchDataComponent implements OnInit {
   data: number[][] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -24,27 +24,41 @@ export class FetchDataComponent implements OnInit{
   activeNumber: number = 1;
   difficulty: number = 25;
 
-  invalidGuess: {x: number, y: number} = {x: -1, y: -1};
+  invalidGuess: { x: number, y: number } = {x: -1, y: -1};
+  actionsBlocked: boolean = false;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private toastr: ToastrService) {
     this.baseUrl = baseUrl;
   }
 
   getSudoku() {
-    this.http.get<number[][]>(this.baseUrl + 'sudoku/'+ this.difficulty).subscribe(result => {
+    this.actionsBlocked = true;
+
+    this.http.get<number[][]>(this.baseUrl + 'sudoku/' + this.difficulty).subscribe(result => {
       this.data = result;
-    }, error => console.error(error));
+      this.actionsBlocked = false;
+    }, error => {
+      console.error(error)
+      this.actionsBlocked = false;
+    });
   }
+
   postSudoku() {
+    this.actionsBlocked = true;
+
     this.http.post<number[][]>(this.baseUrl + 'sudoku', this.data).subscribe(result => {
-      if(result[0].reduce((a, b) => a + b) === 0){
+      if (result[0].reduce((a, b) => a + b) === 0) {
         this.toastr.error('Invalid sudoku or no solution found', 'Error', {
           timeOut: 3000,
         });
-      }else{
+      } else {
         this.data = result;
       }
-    }, error => console.error(error));
+      this.actionsBlocked = false;
+    }, error => {
+      console.error(error)
+      this.actionsBlocked = false;
+    });
   }
 
   rightClick($event: MouseEvent, i: number, j: number) {
@@ -67,9 +81,9 @@ export class FetchDataComponent implements OnInit{
   }
 
   setNumber(row: number, col: number) {
-    if(SudokuFunctions.isNumberValid(this.data, row, col, this.activeNumber)) {
+    if (this.data[row][col] === 0 && SudokuFunctions.isNumberValid(this.data, row, col, this.activeNumber)) {
       this.data[row][col] = this.activeNumber;
-    }else{
+    } else {
       this.invalidGuess = {x: row, y: col};
       setTimeout(() => {
         this.invalidGuess = {x: -1, y: -1};
@@ -79,12 +93,12 @@ export class FetchDataComponent implements OnInit{
 
   ngOnInit(): void {
     let loaded = localStorage.getItem('sudoku');
-    if(loaded){
+    if (loaded) {
       this.data = JSON.parse(loaded);
     }
   }
 
-  @HostListener('window:beforeunload', [ '$event' ])
+  @HostListener('window:beforeunload', ['$event'])
   beforeUnloadHandler() {
     localStorage.setItem('sudoku', JSON.stringify(this.data));
   }

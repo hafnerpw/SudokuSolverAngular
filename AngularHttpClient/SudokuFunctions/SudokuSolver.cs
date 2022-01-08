@@ -4,9 +4,9 @@ public static class SudokuSolver
 {
     public static bool SolveSudoku(IReadOnlyList<int[]> sudoku)
     {
-        for (var i = 0; i < sudoku.Count; i++)
+        for (var i = 0; i < 9; i++)
         {
-            for (var j = 0; j < sudoku.Count; j++)
+            for (var j = 0; j < 9; j++)
             {
                 if (sudoku[i][j] != 0) continue;
                 for (var val = 1; val <= 9; val++)
