@@ -44,7 +44,8 @@ namespace AngularHttpClient.Controllers
                 }
             }
 
-            SudokuSolver.SolveSudoku(sudoku); //TODO: implement human-like solve algorithm
+            SudokuSolver.HumanSolve(sudoku);
+            //SudokuSolver.SolveSudoku(sudoku); //TODO: implement human-like solve algorithm
 
             for(var p = 0; p < difficulty; p++)
             {
