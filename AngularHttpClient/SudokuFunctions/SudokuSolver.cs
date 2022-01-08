@@ -1,7 +1,62 @@
+using System.Collections;
+
 namespace AngularHttpClient.SudokuFunctions;
 
 public static class SudokuSolver
 {
+    public static bool HumanSolve(int[][] sudoku)
+    {
+        var solutionsMatrix = new List<List<List<int>>>(9);
+
+        for (var i = 0; i < 9; i++)
+        {
+            solutionsMatrix.Add(new List<List<int>>(9));
+            for (var j = 0; j < 9; j++)
+            {
+                solutionsMatrix[i].Add(new List<int>(9));
+            }
+        } /* INITIALIZED SOLUTIONS MATRIX */
+
+        IterationStep(sudoku, solutionsMatrix);
+
+        while (!solutionsMatrix.All(row => row.All(col => col.Count is > 1 or 0)))
+        {
+            IterationStep(sudoku, solutionsMatrix);
+        }
+
+        return SolveSudoku(sudoku);
+    }
+
+    private static void IterationStep(int[][] sudoku, List<List<List<int>>> solutionsMatrix)
+    {
+        for (var i = 0; i < 9; i++)
+        {
+            for (var j = 0; j < 9; j++)
+            {
+                if (sudoku[i][j] != 0) continue;
+
+                for (var k = 1; k < 10; k++)
+                {
+                    if (IsNumberValid(sudoku, i, j, k))
+                    {
+                        solutionsMatrix[i][j].Add(k);
+                    }
+                }
+
+                if (solutionsMatrix[i][j].Count == 0)
+                {
+                    return;
+                }
+
+                if (solutionsMatrix[i][j].Count == 1)
+                {
+                    sudoku[i][j] = solutionsMatrix[i][j][0];
+                    solutionsMatrix[i][j].Clear();
+                }
+            }
+        }
+    }
+
     public static bool SolveSudoku(IReadOnlyList<int[]> sudoku)
     {
         for (var i = 0; i < 9; i++)
